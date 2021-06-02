@@ -341,19 +341,20 @@ public class pesca {
 
             InputStream registro = new FileInputStream(archivoRegistro);
 
-            int hstgNombre = 1;
-            int hstgApellido = 2;
-            int hstgPez = 3;
+            int hastagNombre = 1;
+            int hastagApellido = 2;
+            int hastagPez = 3;
 
+            //Hashmap para tener guardado el nombre del pez y la cantidad
             HashMap<String, Integer> frecuencia = new HashMap<String, Integer>();
 
             //Recorremos fichero registro.txt
             for (int i = 0; i < contarLineas(archivoRegistro); i++) {
-                String nombre = obtenerAtributo(archivoRegistro, i, hstgNombre);
-                String apellido = obtenerAtributo(archivoRegistro, i, hstgApellido);
+                String nombre = obtenerAtributo(archivoRegistro, i, hastagNombre);
+                String apellido = obtenerAtributo(archivoRegistro, i, hastagApellido);
 
                 if (nombre.equals(usuario.getNombre()) && apellido.equals(usuario.getApellido())) { //Comprueba usuario
-                    String pez = obtenerAtributo(archivoRegistro, i, hstgPez); //Coge nombre pez
+                    String pez = obtenerAtributo(archivoRegistro, i, hastagPez); //Coge nombre pez
                     frecuencia.put(pez, frecuencia.getOrDefault(pez, 0) + 1); //Añade al hashmap nombre pez, si existe suma 1 y sino lo crea y lo pone a 1
                 }
             }
@@ -372,9 +373,9 @@ public class pesca {
 
         InputStream registro = new FileInputStream(archivoRegistro);
 
-        int hstgNombre = 1;
-        int hstgApellido = 2;
-        int hstgPez = 3;
+        int hastagNombre = 1;
+        int hastagApellido = 2;
+        int hastagPez = 3;
 
         //Creamos hashmaps
         HashMap<String, HashMap> pescadores = new HashMap<String, HashMap>();
@@ -382,8 +383,8 @@ public class pesca {
 
         //Bucle para recorrer el archivo de registro
         for (int i = 0; i < contarLineas(archivoRegistro) ; i++) {
-            String nombre = obtenerAtributo(archivoRegistro, i, hstgNombre);
-            String apellido = obtenerAtributo(archivoRegistro, i, hstgApellido);
+            String nombre = obtenerAtributo(archivoRegistro, i, hastagNombre);
+            String apellido = obtenerAtributo(archivoRegistro, i, hastagApellido);
             String nombreCompleto = nombre + " " + apellido;
 
             if(!pescadores.containsKey(nombreCompleto)){ //Nuevo pescador (no existia en el hashmap)
@@ -391,7 +392,7 @@ public class pesca {
                 pescadores.put(nombreCompleto,frecuencia); // Lo introducimos en el hashmap junto con el hashmap de peces
             }
 
-            String pez = obtenerAtributo(archivoRegistro, i, hstgPez);
+            String pez = obtenerAtributo(archivoRegistro, i, hastagPez);
             // get de frecuencia asignada a la posicion de nombreCOmpleto y put en la posicion de pez
             pescadores.get(nombreCompleto).put(pez, frecuencia.getOrDefault(pez, 0) + 1);
         }
